@@ -22,57 +22,66 @@
   <body ng-controller="MemoriesController">
     <div class="container">
       <h1>Memories</h1>
-      <!-- <h2 ng-repeat="memory in memories">{{memory}}</h2> -->
-      <!-- <button class="btn btn-default" ng-click="getMemories()" type="submit">
-           Fetch Memories
-           </button> -->
-      <p></p>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <button class="btn btn-default" ng-click="toggleFormShow()">Fill Out a Memory Form</button>
-            <form ng-show=showMemForm>
-              <div class="input-group input-group-lg">
-              <label>In the old days . . .
-                <input type="text" ng-model="old_days" class="form-control" placeholder="Kids walked up hill both ways to and from school . . .">
-              </label>
-              <p></p>
-              <label>Nowadays
-                <input type="text" ng-model="these_days" class="form-control" placeholder="Kids fly like superman">
-              </label>
-              <p></p>
-              <label>Year
-                <input type="text" ng-model="year" class="form-control" placeholder="2000">
-              </label>
-              <p></p>
-              <input type="submit" class="btn btn-default" ng-click="postToApi()">
+      <div class="row">
+        <!-- <h2 ng-repeat="memory in memories">{{memory}}</h2> -->
+        <!-- <button class="btn btn-default" ng-click="getMemories()" type="submit">
+            Fetch Memories
+            </button> -->
+        <p></p>
+        <div class="col-md-1">
+          <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="active" ng-repeat="year in sidebarYears track by year" ><a href="#">{{year}}</a></li>
+          </ul>
+        </div>
+        <div class="col-md-10">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <button class="btn btn-default" ng-click="toggleFormShow()">Fill Out a Memory Form</button>
+                <form ng-show=showMemForm>
+                  <div class="input-group input-group-lg">
+                  <label>In the old days . . .
+                    <input type="text" ng-model="old_days" class="form-control" placeholder="Kids walked up hill both ways to and from school . . .">
+                  </label>
+                  <p></p>
+                  <label>Nowadays
+                    <input type="text" ng-model="these_days" class="form-control" placeholder="Kids fly like superman">
+                  </label>
+                  <p></p>
+                  <label>Year
+                    <input type="text" ng-model="year" class="form-control" placeholder="2000">
+                  </label>
+                  <p></p>
+                  <input type="submit" class="btn btn-default" ng-click="postToApi()">
+                  </div>
+                </form>
+                <p></p>
               </div>
-            </form>
-            <p></p>
+            </div>
           </div>
+          <ul>
+            <div ng-repeat="datum in memoryResponse" class="container">
+              <div class="row">
+                <li>
+                  <div class="col-md-4"><b>Old Days:</b>{{datum.attributes.old_days}}</div>
+                  <div class="col-md-4"><b>These Days:</b> {{datum.attributes.these_days}}</div>
+                  <div class="col-md-4"><b>Year: </b>{{datum.attributes.year}}</div>
+                </li>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <li ng-show=old_days>
+                  <div class="col-md-4"><b>Old Days:</b>{{old_days}}</div>
+                  <div class="col-md-4"><b>These Days:</b>{{these_days}}</div>
+                  <div class="col-md-4"><b>Year:</b>{{year}}</div>
+                  </div>
+                </li>
+              </div>
+            </div>
+          </ul>
         </div>
       </div>
-      <ul>
-        <div ng-repeat="datum in memoryResponse" class="container">
-          <div class="row">
-            <li>
-              <div class="col-md-4"><b>Old Days:</b>{{datum.attributes.old_days}}</div>
-              <div class="col-md-4"><b>These Days:</b> {{datum.attributes.these_days}}</div>
-              <div class="col-md-4"><b>Year: </b>{{datum.attributes.year}}</div>
-            </li>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-            <li ng-show=old_days>
-              <div class="col-md-4"><b>Old Days:</b>{{old_days}}</div>
-              <div class="col-md-4"><b>These Days:</b>{{these_days}}</div>
-              <div class="col-md-4"><b>Year:</b>{{year}}</div>
-              </div>
-            </li>
-          </div>
-        </div>
-      </ul>
     </div>
   </body>
 </html>
