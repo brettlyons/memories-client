@@ -13,5 +13,5 @@ angular.module('memoriesApp', [])
         console.log("ERROR:", response);
         $scope.msg = "ERR: " + response;
       });
-    }
+    }();
   });
