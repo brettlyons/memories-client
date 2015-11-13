@@ -1,17 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="redditClone">
+<html lang="en" ng-app="memoriesApp">
   <head>
     <base href ="/">
     <meta charset="UTF-8">
     <title>Memories Client</title>
     <!-- scripts -->
+    <!-- Latest compiled and minified CSS -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
     <script src="js/app.js" type="text/javascript"></script>
   </head>
-  <body>
-
+  <body ng-controller="MemoriesController">
+    <div class="container">
+      <h1>Memories</h1>
+      <!-- <h2 ng-repeat="memory in memories">{{memory}}</h2> -->
+      <button class="btn btn-default" ng-click="getMemories()" type="submit">
+        Fetch Memories
+      </button>
+      <p></p>
+      <ul ng-repeat="datum in memoryResponse">
+        <div class="container">
+          <li class="pull-left">
+            <div class="col-md-12">Old Days: {{datum.attributes.old_days}}
+              These Days: {{datum.attributes.these_days}}
+              Year: {{datum.attributes.year}}
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
   </body>
 </html>
