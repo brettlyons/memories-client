@@ -2,11 +2,11 @@ angular.module('memoriesApp', ['ngRoute'])
   .config(function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: '/partials/homePartial.html',
+        template: '/partials/rootPartial.html',
         controller: 'MemoriesController'
       })
       .when('/:year', {
-        templateUrl: '/partials/yearPartial.html',
+        template: '/partials/yearPartial.html',
         controller: 'YearController'
       })
     $locationProvider.html5Mode(true);
@@ -18,7 +18,8 @@ angular.module('memoriesApp', ['ngRoute'])
       method: 'GET',
       url: 'http://g12-brett-lyons-memories.cfapps.io/api/v1/memories'
     }).then(function successCallback(response) {
-        $scope.memoryResponse = response.data.data;
+      // console.log('RESPONSE', response, 'RESPONSE.DATA', response.data)
+      $scope.memoryResponse = response.data.data;
       }, function errorCallback(response) {
         console.log('ERROR:', response);
         $scope.msg = 'ERR: ' + response;
@@ -52,12 +53,10 @@ angular.module('memoriesApp', ['ngRoute'])
       });
   })
   .controller('YearController', function($scope, $http, $routeParams) {
-    $http.get('http://g12-brett-lyons-memories.cfapps.io/api/v1/memories/' + $routeParams.year)
-      .then(function successCallback(response) {
-        $scope.memoryResponse = response.data.data;
-      }, function errorCallback(response) {
-        console.log('ERROR:', response);
-        $scope.msg = 'ERR: ' + response;
-      });
+    $http.get('http://g12-brett-lyons-memories.cfapps.io/api/v1/memories' + $routeParams.year)
+      .then(function (response) {
+
+        
+      })
   });
 

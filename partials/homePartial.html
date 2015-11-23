@@ -1,0 +1,31 @@
+<button class="btn btn-primary" ng-click="toggleFormShow()" ng-hide="showMemForm">Fill Out a Memory Form</button>
+<button class="btn btn-primary" ng-click="toggleFormShow()" ng-show="showMemForm">Hide form</button>
+  <form class="input-group-lg" ng-show=showMemForm>
+    <label>In the old days . . .</label>
+      <input  type="text" ng-model="old_days" class="form-control" placeholder="Kids walked up hill both ways to and from school . . ." ></input>
+    <p></p>
+    <label>Nowadays</label>
+      <input type="text" ng-model="these_days" class="form-control" placeholder="Kids fly like superman" ></input>
+    <p></p>
+    <label>Year</label>
+      <input type="text" ng-model="year" class="form-control" placeholder="2000"></input>
+    <p></p>
+    <input type="submit" class="btn btn-info" ng-click="postToApi()" value="Add Memory"></input>
+  </form>
+<p></p>
+<ul>
+  <div ng-repeat="datum in memoryResponse" class="container">
+    <div class="row">
+      <li>
+        <div class="col-md-4"><b>Old Days:</b>{{datum.attributes.old_days}}</div>
+        <div class="col-md-4"><b>These Days:</b> {{datum.attributes.these_days}}</div>
+        <div class="col-md-4"><b>Year: </b>{{datum.attributes.year}}</div>
+      </li>
+      <li ng-show=old_days>
+        <div class="col-md-4"><b>Old Days:</b>{{old_days}}</div>
+        <div class="col-md-4"><b>These Days:</b>{{these_days}}</div>
+        <div class="col-md-4"><b>Year:</b>{{year}}</div>
+      </li>
+    </div>
+  </div>
+</ul>
