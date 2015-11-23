@@ -14,10 +14,13 @@ angular.module('memoriesApp', ['ngRoute'])
   .controller('MemoriesController', function($scope, $http) {
     $scope.showMemForm = false;
     $scope.getMemories = function() {
-    $http({
-      method: 'GET',
-      url: 'http://g12-brett-lyons-memories.cfapps.io/api/v1/memories'
-    }).then(function successCallback(response) {
+      // This is the critical code to add when it comes time to do integration with the service discovery
+      // it might need some other tuning
+      // $http.get('http://galvanize-service-registry.cfapps.io/api/v1/cohorts/g12/kids-these-days').then(function(response) {
+      //   $rootScope[url] = response.
+      // })
+      $http.get('http://g12-brett-lyons-memories.cfapps.io/api/v1/memories')
+        .then(function successCallback(response) {
         $scope.memoryResponse = response.data.data;
       }, function errorCallback(response) {
         console.log('ERROR:', response);
