@@ -11,21 +11,20 @@ angular.module('memoriesApp', ['ngRoute'])
       })
     $locationProvider.html5Mode(true);
   })
-  .controller('MemoriesController', function($scope, $http) {
+  .controller('MemoriesController', function($scope, $http, $rootScope) {
     $scope.showMemForm = false;
     $scope.getMemories = function() {
-      // This is the critical code to add when it comes time to do integration with the service discovery
-      // it might need some other tuning
-      // $http.get('http://galvanize-service-registry.cfapps.io/api/v1/cohorts/g12/kids-these-days').then(function(response) {
-      //   $rootScope[url] = response.
-      // })
-      $http.get('http://g12-brett-lyons-memories.cfapps.io/api/v1/memories')
-        .then(function successCallback(response) {
-        $scope.memoryResponse = response.data.data;
-      }, function errorCallback(response) {
-        console.log('ERROR:', response);
-        $scope.msg = 'ERR: ' + response;
-      });
+      $http.get('http://galvanize-service-registry.cfapps.io/api/v1/cohorts/g12/kids-these-days').then(function(response) {
+        $rootScope.serviceUrl = response.data[0].attributes.url + "/api/v1/memories";
+        $http.get($rootScope.serviceUrl);
+          .then(function successCallback(response) {
+            $scope.memoryResponse = response.data.data;
+          }, function errorCallback(response) {
+            console.log('ERROR:', response);
+            $scope.msg = 'ERR: ' + response;
+            $scope.getMemories();
+          });
+      })
     }(); // <-- essential auto-invoke on page load
 
     $scope.toggleFormShow = function() {
@@ -33,17 +32,19 @@ angular.module('memoriesApp', ['ngRoute'])
     };
 
     $scope.postToApi = function() {
+      // $http.post($rootScope.serviceUrl, {
       $http.post('http://g12-brett-lyons-memories.cfapps.io/api/v1/memories', {
         'data': {
-            'type': 'memory',
-            'attributes': {
-              'old_days': $scope.old_days,
-              'these_days': $scope.these_days,
-              'year': $scope.year
-            }
+          'type': 'memory',
+          'attributes': {
+            'old_days': $scope.old_days,
+            'these_days': $scope.these_days,
+            'year': $scope.year
           }
+        }
       }).then(function() {}); // just in case its needed later
     };
+    // $http.get($rootScope.serviceUrl + "/years")
     $http.get('http://g12-brett-lyons-memories.cfapps.io/api/v1/memories/years')
       .then(function(response) {
         $scope.sidebarYears = response.data.data.reduce(function(collection, currentVal) {
@@ -54,7 +55,8 @@ angular.module('memoriesApp', ['ngRoute'])
         }, []).sort(function(a,  b) { return a - b;});
       });
   })
-  .controller('YearController', function($scope, $http, $routeParams) {
+  .controller('YearController', function($scope, $http, $rootScope, $routeParams) {
+    // $http.get($rootScope.serviceUrl + "/" + $routeParams.year)
     $http.get('http://g12-brett-lyons-memories.cfapps.io/api/v1/memories/' + $routeParams.year)
       .then(function successCallback(response) {
         $scope.memoryResponse = response.data.data;
