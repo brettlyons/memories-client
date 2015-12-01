@@ -1,21 +1,20 @@
 <a href="/"><button class="btn btn-primary"><b>Return the Home Page Listing</b></button></a>
+<div class="row">
 <ul>
-  <div ng-repeat="datum in memoryResponse" class="container">
+  <div ng-repeat="datum in memoryResponse">
     <div class="row">
       <li>
         <div class="col-md-4"><b>Old Days:</b>{{datum.attributes.old_days}}</div>
-        <div class="col-md-4"><b>These Days:</b> {{datum.attributes.these_days}}</div>
-        <div class="col-md-4"><b>Year: </b>{{datum.attributes.year}}</div>
+        <div class="col-md-4"><b>These Days:</b>{{datum.attributes.these_days}}</div>
+        <div class="col-md-4"><b>Year:</b>{{datum.attributes.year}}</div>
       </li>
     </div>
   </div>
-  <div class="container">
-    <div class="row">
-      <li ng-show=old_days>
-        <div class="col-md-4"><b>Old Days:</b>{{old_days}}</div>
-        <div class="col-md-4"><b>These Days:</b>{{these_days}}</div>
-        <div class="col-md-4"><b>Year:</b>{{year}}</div>
-      </li>
-    </div>
+  <div ng-show="old_days" class="row">
+    <li>
+      <div class="col-md-4"><b>Old Days:</b>{{old_days}}</div>
+      <div class="col-md-4"><b>These Days:</b>{{these_days}}</div>
+      <div class="col-md-4"><b>Year:</b>{{year}}</div>
+    </li>
   </div>
 </ul>
