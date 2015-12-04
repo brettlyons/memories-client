@@ -5,7 +5,7 @@ angular.module('memoriesApp', ['ngRoute'])
         templateUrl: '/partials/homePartial.html',
         controller: 'MemoriesController'
       })
-      .when('/:year', {
+      .when('/years/:year', {
         templateUrl: '/partials/yearPartial.html',
         controller: 'YearController'
       });
