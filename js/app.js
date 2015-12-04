@@ -27,7 +27,7 @@ angular.module('memoriesApp', ['ngRoute'])
           }, function errorCallback(response) {
             console.log('ERROR:', response);
             $scope.msg = 'ERR: ' + response;
-            console.log("TYPEOF getMemories", typeof $scope.getMemories)
+            //console.log("TYPEOF getMemories", typeof $scope.getMemories)
             $scope.getMemories(nextIndex + 1);
           });
         // $http.get($rootScope.serviceUrl + "/years")
